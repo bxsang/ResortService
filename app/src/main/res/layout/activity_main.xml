@@ -159,7 +159,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/rating"
+                android:id="@+id/cv_rating"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_columnWeight="1"
@@ -190,7 +190,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/statistics"
+                android:id="@+id/cv_statistics"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_columnWeight="1"

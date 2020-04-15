@@ -6,7 +6,7 @@
     <string name="login_button">Đăng nhập</string>
     <string name="login_wrong_credential">Sai tên đăng nhập hoặc mật khẩu</string>
     <string name="connection_failed">Lỗi kết nối</string>
-    <string name="api_url">http://192.168.1.100/resort/api/</string>
+    <string name="api_url">http://192.168.56.1/resort/api/</string>
     <string name="booking">Booking</string>
     <string name="room_mgmt">Quản lý phòng</string>
     <string name="customer">Khách hàng</string>

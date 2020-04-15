@@ -2,7 +2,11 @@ package com.sang.resortservice;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.gridlayout.widget.GridLayout;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +16,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 
 public class MainActivity extends AppCompatActivity {
     MaterialToolbar topAppBar;
+    GridLayout gridLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         topAppBar = findViewById(R.id.topAppBar);
+        gridLayout = findViewById(R.id.gl_main);
+
+        setClickEvent(gridLayout);
 
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Clicked!!", Toast.LENGTH_LONG).show();
             }
         });
-
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -39,5 +46,46 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setClickEvent(GridLayout gridLayout) {
+        for (int i=0; i<gridLayout.getChildCount(); i++) {
+            CardView cardView = (CardView) gridLayout.getChildAt(i);
+            int id = cardView.getId();
+            if (id == R.id.cv_booking) {
+                cardView.setOnClickListener(v ->
+                        startActivity(new Intent(MainActivity.this, BookingActivity.class)));
+            } else if (id == R.id.cv_room) {
+                cardView.setOnClickListener(v ->
+                        startActivity(new Intent(MainActivity.this, RoomManagmentActivity.class)));
+            } else if (id == R.id.cv_customer) {
+                cardView.setOnClickListener(v ->
+                        startActivity(new Intent(MainActivity.this, CustomerManagmentActivity.class)));
+            } else if (id == R.id.cv_rating) {
+                cardView.setOnClickListener(v ->
+                        startActivity(new Intent(MainActivity.this, FeedbackActivity.class)));
+            } else if (id == R.id.cv_statistics) {
+                cardView.setOnClickListener(v ->
+                        startActivity(new Intent(MainActivity.this, StatisticsActivity.class)));
+            } else if (id == R.id.cv_logout) {
+                cardView.setOnClickListener(v ->
+                        logout());
+            }
+        }
+    }
+
+    private void logout() {
+        Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("result", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", false);
+        editor.apply();
+
+        Intent intent = new Intent(this, GreetingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+        finish();
     }
 }
