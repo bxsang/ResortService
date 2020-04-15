@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Resort Service</string>
+    <string name="login_gretting">Welcome back</string>
+    <string name="login_hint_username">Tên đăng nhập</string>
+    <string name="login_hint_password">Mật khẩu</string>
+    <string name="login_button">Đăng nhập</string>
+    <string name="login_wrong_credential">Sai tên đăng nhập hoặc mật khẩu</string>
+    <string name="connection_failed">Lỗi kết nối</string>
+    <string name="api_url">http://192.168.1.100/resort/api/</string>
+</resources>
