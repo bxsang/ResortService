@@ -1,13 +1,18 @@
-package com.sang.resortservice;
+package com.sang.resortservice.api;
 
 import androidx.annotation.NonNull;
 
-public class User {
+import com.google.gson.annotations.SerializedName;
+
+public class GetUserResult {
+    @SerializedName("id")
     private int id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("token")
     private String token;
 
-    public User(int id, String name, String token) {
+    public GetUserResult(int id, String name, String token) {
         this.id = id;
         this.name = name;
         this.token = token;

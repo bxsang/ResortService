@@ -1,18 +1,20 @@
 package com.sang.resortservice;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.RequestQueue;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.sang.resortservice.api.APIClient;
+import com.sang.resortservice.api.GetUserResult;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout layoutPassword;
     TextInputEditText editTextPassword;
     ExtendedFloatingActionButton buttonLogin;
+
+    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +53,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        Retrofit retrofit = new Retrofit.Builder()
+        Retrofit builder = new Retrofit.Builder()
                 .baseUrl(getString(R.string.api_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        APIClient client = retrofit.create(APIClient.class);
+        APIClient client = builder.create(APIClient.class);
 
-        Call<User> call = client.login(username, password);
+        Call<GetUserResult> call = client.login(username, password);
 
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<GetUserResult>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<GetUserResult> call, Response<GetUserResult> response) {
                 if (response.isSuccessful() && response.body().getToken() != null) {
                     Log.d("Response", response.body().toString());
 
@@ -78,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<GetUserResult> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, getString(R.string.connection_failed), Toast.LENGTH_LONG).show();
             }
         });
