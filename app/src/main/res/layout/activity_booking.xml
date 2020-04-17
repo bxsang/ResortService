@@ -229,13 +229,13 @@
 
                     <Button
                         android:id="@+id/btn_date_picker"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="3dp"
-                        app:icon="@drawable/ic_date_range_24dp"
-                        style="@style/Widget.MaterialComponents.Button.Icon"
-                        android:text="Chon ngay"/>
+                        android:text="@string/select_date"
+                        app:icon="@drawable/ic_date_range_24dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

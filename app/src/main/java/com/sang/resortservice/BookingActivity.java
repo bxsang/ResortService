@@ -21,6 +21,7 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.sang.resortservice.api.APIClient;
 import com.sang.resortservice.api.BookingResponse;
+import com.sang.resortservice.api.GetPriceResponse;
 import com.sang.resortservice.api.GetRoomIdResponse;
 import com.sang.resortservice.api.GetRoomTypesResponse;
 import com.sang.resortservice.api.GetRoomsResponse;
@@ -60,7 +61,10 @@ public class BookingActivity extends AppCompatActivity {
 
     Long timestampDate1;
     Long timestampDate2;
+    String selectedType;
+    String selectedRoom;
     int roomId = 0;
+    long price = 0;
 
     Retrofit retrofit;
     APIClient client;
@@ -88,12 +92,12 @@ public class BookingActivity extends AppCompatActivity {
         initRoomTypes();
 
         roomTypes.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedType = roomTypes.getAdapter().getItem(position).toString();
+            selectedType = roomTypes.getAdapter().getItem(position).toString();
             initRooms(selectedType);
         });
 
         roomsName.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedRoom = roomsName.getAdapter().getItem(position).toString();
+            selectedRoom = roomsName.getAdapter().getItem(position).toString();
             getRoomId(selectedRoom);
         });
 
@@ -111,6 +115,8 @@ public class BookingActivity extends AppCompatActivity {
 
                 tvDate1.setText(getString(R.string.date_from) + "\n" + sdf.format(date1));
                 tvDate2.setText(getString(R.string.date_to) + "\n" + sdf.format(date2));
+
+                getPrice();
             });
             picker.show(getSupportFragmentManager(), picker.toString());
         });
@@ -118,6 +124,11 @@ public class BookingActivity extends AppCompatActivity {
         btnBook.setOnClickListener(v -> {
             showCofirmDialog();
         });
+    }
+
+    private void getCheckedGender() {
+        int chkGenderId = radioGroupCustomerGender.getCheckedRadioButtonId();
+        chkGender = findViewById(chkGenderId);
     }
 
     private void prepareRetrofit() {
@@ -198,6 +209,25 @@ public class BookingActivity extends AppCompatActivity {
         roomId = response.getId();
     }
 
+    private void getPrice() {
+        Call<GetPriceResponse> call = client.getPrice("", selectedType);
+        call.enqueue(new Callback<GetPriceResponse>() {
+            @Override
+            public void onResponse(Call<GetPriceResponse> call, Response<GetPriceResponse> response) {
+                setPrice(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<GetPriceResponse> call, Throwable t) {
+                Toast.makeText(BookingActivity.this, getString(R.string.connection_failed), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void setPrice(GetPriceResponse response) {
+        price = response.getPrice();
+    }
+
     private BookingValues getValues() {
         String customerName = editTextCustomerName.getText().toString();
         String customerPhone = editTextcustomerPhone.getText().toString();
@@ -207,11 +237,6 @@ public class BookingActivity extends AppCompatActivity {
         String customerAddress = editTextCustomerAddress.getText().toString();
 
         return new BookingValues(customerName, customerPhone, customerGender, customerEmail, customerAddress, roomId, timestampDate1, timestampDate2);
-    }
-
-    private void getCheckedGender() {
-        int chkGenderId = radioGroupCustomerGender.getCheckedRadioButtonId();
-        chkGender = findViewById(chkGenderId);
     }
 
     private void book(BookingValues values) {
@@ -245,15 +270,16 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void showCofirmDialog() {
+        BookingValues values = getValues();
         new MaterialAlertDialogBuilder(BookingActivity.this)
                 .setTitle(getString(R.string.cofirm))
-                .setMessage(getString(R.string.booking_cofirm))
+                .setMessage(getString(R.string.booking_cofirm) + "\nSố tiền cần thanh toán: " + price)
                 .setPositiveButton(getString(R.string.cofirm), (dialog, which) -> {
-                    BookingValues values = getValues();
                     book(values);
                     returnHome();
                 })
                 .setNegativeButton(getString(R.string.cancle), (dialog, which) -> {
+                    Toast.makeText(BookingActivity.this, String.valueOf(price), Toast.LENGTH_SHORT).show();
                 })
                 .show();
     }

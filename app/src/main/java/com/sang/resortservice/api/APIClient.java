@@ -32,4 +32,7 @@ public interface APIClient {
                                @Field("room_id") int roomId,
                                @Field("checkin_date") String checkinDate,
                                @Field("checkout_date") String checkoutDate);
+
+    @GET("booking.php")
+    Call<GetPriceResponse> getPrice(@Query("get_price") String abc, @Query("type_name") String typeName);
 }
