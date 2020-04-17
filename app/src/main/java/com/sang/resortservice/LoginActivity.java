@@ -9,12 +9,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.sang.resortservice.api.APIClient;
-import com.sang.resortservice.api.GetUserResult;
+import com.sang.resortservice.api.GetUserResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,8 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout layoutPassword;
     TextInputEditText editTextPassword;
     ExtendedFloatingActionButton buttonLogin;
-
-    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +56,11 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         APIClient client = builder.create(APIClient.class);
 
-        Call<GetUserResult> call = client.login(username, password);
+        Call<GetUserResponse> call = client.login(username, password);
 
-        call.enqueue(new Callback<GetUserResult>() {
+        call.enqueue(new Callback<GetUserResponse>() {
             @Override
-            public void onResponse(Call<GetUserResult> call, Response<GetUserResult> response) {
+            public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                 if (response.isSuccessful() && response.body().getToken() != null) {
                     Log.d("Response", response.body().toString());
 
@@ -82,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GetUserResult> call, Throwable t) {
+            public void onFailure(Call<GetUserResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, getString(R.string.connection_failed), Toast.LENGTH_LONG).show();
             }
         });

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GetUserResult {
+public class GetUserResponse {
     @SerializedName("id")
     private int id;
     @SerializedName("name")
@@ -12,7 +12,7 @@ public class GetUserResult {
     @SerializedName("token")
     private String token;
 
-    public GetUserResult(int id, String name, String token) {
+    public GetUserResponse(int id, String name, String token) {
         this.id = id;
         this.name = name;
         this.token = token;

@@ -5,13 +5,31 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIClient {
 
     @FormUrlEncoded
     @POST("login.php")
-    Call<GetUserResult> login(@Field("username") String username, @Field("password") String password);
+    Call<GetUserResponse> login(@Field("username") String username, @Field("password") String password);
+
+    @GET("room.php?get_types")
+    Call<GetRoomTypesResponse> getRoomTypes();
 
     @GET("room.php")
-    Call<GetRoomTypesResult> getRoomTypes();
+    Call<GetRoomsResponse> getRooms(@Query("type") String type);
+
+    @GET("room.php")
+    Call<GetRoomIdResponse> getRoomId(@Query("get_room_id") String abc, @Query("room_name") String roomName);
+
+    @FormUrlEncoded
+    @POST("booking.php")
+    Call<BookingResponse> book(@Field("name") String customerName,
+                               @Field("phone_number") String customerPhone,
+                               @Field("gender") String customerGender,
+                               @Field("email") String customerEmail,
+                               @Field("address") String customerAddress,
+                               @Field("room_id") int roomId,
+                               @Field("checkin_date") String checkinDate,
+                               @Field("checkout_date") String checkoutDate);
 }
