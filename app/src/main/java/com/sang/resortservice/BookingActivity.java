@@ -1,6 +1,8 @@
 package com.sang.resortservice;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -249,9 +251,16 @@ public class BookingActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.cofirm), (dialog, which) -> {
                     BookingValues values = getValues();
                     book(values);
+                    returnHome();
                 })
                 .setNegativeButton(getString(R.string.cancle), (dialog, which) -> {
                 })
                 .show();
+    }
+
+    private void returnHome() {
+        final Intent data = new Intent();
+        setResult(Activity.RESULT_OK, data);
+        finish();
     }
 }

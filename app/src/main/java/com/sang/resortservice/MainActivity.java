@@ -12,6 +12,8 @@ import androidx.gridlayout.widget.GridLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class MainActivity extends AppCompatActivity {
+    private static int REQUEST_CODE = 100;
+
     MaterialToolbar topAppBar;
     GridLayout gridLayout;
 
@@ -44,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
             int id = cardView.getId();
             if (id == R.id.cv_booking) {
                 cardView.setOnClickListener(v ->
-                        startActivity(new Intent(MainActivity.this, BookingActivity.class)));
+                        startActivityForResult(new Intent(MainActivity.this, BookingActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_room) {
                 cardView.setOnClickListener(v ->
-                        startActivity(new Intent(MainActivity.this, RoomManagmentActivity.class)));
+                        startActivityForResult(new Intent(MainActivity.this, RoomManagmentActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_customer) {
                 cardView.setOnClickListener(v ->
-                        startActivity(new Intent(MainActivity.this, CustomerManagmentActivity.class)));
+                        startActivityForResult(new Intent(MainActivity.this, CustomerManagmentActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_rating) {
                 cardView.setOnClickListener(v ->
-                        startActivity(new Intent(MainActivity.this, FeedbackActivity.class)));
+                        startActivityForResult(new Intent(MainActivity.this, FeedbackActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_statistics) {
                 cardView.setOnClickListener(v ->
-                        startActivity(new Intent(MainActivity.this, StatisticsActivity.class)));
+                        startActivityForResult(new Intent(MainActivity.this, StatisticsActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_logout) {
                 cardView.setOnClickListener(v ->
                         logout());
