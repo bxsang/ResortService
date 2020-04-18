@@ -165,7 +165,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void initRooms(String type) {
-        Call<GetRoomsResponse> call = client.getRooms(type);
+        Call<GetRoomsResponse> call = client.getRoomsByType(type);
 
         call.enqueue(new Callback<GetRoomsResponse>() {
             @Override

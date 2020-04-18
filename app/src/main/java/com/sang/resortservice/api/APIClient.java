@@ -16,8 +16,11 @@ public interface APIClient {
     @GET("room.php?get_types")
     Call<GetRoomTypesResponse> getRoomTypes();
 
+    @GET("room.php?get_all")
+    Call<GetRoomsResponse> getAllRooms();
+
     @GET("room.php")
-    Call<GetRoomsResponse> getRooms(@Query("type") String type);
+    Call<GetRoomsResponse> getRoomsByType(@Query("type") String type);
 
     @GET("room.php")
     Call<GetRoomIdResponse> getRoomId(@Query("get_room_id") String abc, @Query("room_name") String roomName);
