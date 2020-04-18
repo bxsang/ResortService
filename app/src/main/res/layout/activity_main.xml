@@ -146,13 +146,13 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_man"/>
+                        android:src="@drawable/ic_reservation"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/customer"
+                        android:text="@string/reservation_manage"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
                 </LinearLayout>

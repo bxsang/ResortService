@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(new Intent(MainActivity.this, RoomManagmentActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_customer) {
                 cardView.setOnClickListener(v ->
-                        startActivityForResult(new Intent(MainActivity.this, CustomerManagmentActivity.class), REQUEST_CODE));
+                        startActivityForResult(new Intent(MainActivity.this, ReservationManagmentActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_rating) {
                 cardView.setOnClickListener(v ->
                         startActivityForResult(new Intent(MainActivity.this, FeedbackActivity.class), REQUEST_CODE));

@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".StatisticsActivity"></activity>
         <activity android:name=".FeedbackActivity" />
-        <activity android:name=".CustomerManagmentActivity" />
+        <activity android:name=".ReservationManagmentActivity" />
         <activity android:name=".RoomManagmentActivity" />
         <activity android:name=".BookingActivity" />
         <activity

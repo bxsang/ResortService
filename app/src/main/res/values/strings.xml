@@ -30,4 +30,5 @@
     <string name="agree">Đồng ý</string>
     <string name="cancle">Hủy bỏ</string>
     <string name="booking_cofirm">Bạn có chắc chắn xác nhận đặt phòng</string>
+    <string name="reservation_manage">Quản lý đặt phòng</string>
 </resources>
