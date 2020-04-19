@@ -3,32 +3,42 @@ package com.sang.resortservice;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private static int REQUEST_CODE = 100;
 
+    DrawerLayout drawerLayout;
     MaterialToolbar topAppBar;
     GridLayout gridLayout;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        drawerLayout = findViewById(R.id.layout_drawer);
         topAppBar = findViewById(R.id.topAppBar);
         gridLayout = findViewById(R.id.gl_main);
+        navigationView = findViewById(R.id.navigation_drawer);
 
         setClickEvent(gridLayout);
 
         topAppBar.setNavigationOnClickListener(v ->
-                Toast.makeText(MainActivity.this, "Clicked!!", Toast.LENGTH_LONG).show());
+                drawerLayout.openDrawer(GravityCompat.START));
+
         topAppBar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.search:
@@ -37,6 +47,28 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     return false;
             }
+        });
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            item.setChecked(true);
+            drawerLayout.closeDrawers();
+            switch (item.getItemId()) {
+                case R.id.nv_menu_booking:
+                    startActivityForResult(new Intent(MainActivity.this, BookingActivity.class), REQUEST_CODE);
+                case R.id.nv_menu_room_mgmt:
+                    startActivity(new Intent(MainActivity.this, RoomManagmentActivity.class));
+                case R.id.nv_menu_reservation_mgnt:
+                    startActivity(new Intent(MainActivity.this, ReservationManagmentActivity.class));
+                case R.id.nv_menu_rating:
+                    startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
+                case R.id.nv_menu_statistics:
+                    startActivity(new Intent(MainActivity.this, StatisticsActivity.class));
+                case R.id.nv_menu_logout:
+                    logout();
+                default:
+
+            }
+            return true;
         });
     }
 
@@ -49,16 +81,16 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(new Intent(MainActivity.this, BookingActivity.class), REQUEST_CODE));
             } else if (id == R.id.cv_room) {
                 cardView.setOnClickListener(v ->
-                        startActivityForResult(new Intent(MainActivity.this, RoomManagmentActivity.class), REQUEST_CODE));
+                        startActivity(new Intent(MainActivity.this, RoomManagmentActivity.class)));
             } else if (id == R.id.cv_customer) {
                 cardView.setOnClickListener(v ->
-                        startActivityForResult(new Intent(MainActivity.this, ReservationManagmentActivity.class), REQUEST_CODE));
+                        startActivity(new Intent(MainActivity.this, ReservationManagmentActivity.class)));
             } else if (id == R.id.cv_rating) {
                 cardView.setOnClickListener(v ->
-                        startActivityForResult(new Intent(MainActivity.this, FeedbackActivity.class), REQUEST_CODE));
+                        startActivity(new Intent(MainActivity.this, FeedbackActivity.class)));
             } else if (id == R.id.cv_statistics) {
                 cardView.setOnClickListener(v ->
-                        startActivityForResult(new Intent(MainActivity.this, StatisticsActivity.class), REQUEST_CODE));
+                        startActivity(new Intent(MainActivity.this, StatisticsActivity.class)));
             } else if (id == R.id.cv_logout) {
                 cardView.setOnClickListener(v ->
                         logout());

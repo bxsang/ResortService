@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nv_menu_booking"
+        android:title="@string/booking"/>
+    <item
+        android:id="@+id/nv_menu_room_mgmt"
+        android:title="@string/room_mgmt"/>
+    <item
+        android:id="@+id/nv_menu_reservation_mgnt"
+        android:title="@string/reservation_manage"/>
+    <item
+        android:id="@+id/nv_menu_rating"
+        android:title="@string/rating"/>
+    <item
+        android:id="@+id/nv_menu_statistics"
+        android:title="@string/statistics"/>
+    <item
+        android:id="@+id/nv_menu_logout"
+        android:title="@string/logout"/>
+</menu>

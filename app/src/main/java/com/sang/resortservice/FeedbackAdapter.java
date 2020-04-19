@@ -4,44 +4,39 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sang.resortservice.api.Room;
+import com.sang.resortservice.api.Feedback;
 
 import java.util.List;
 
-public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder> {
+public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyViewHolder> {
     private Context context;
-    private List<Room> roomList;
+    private List<Feedback> feedbackList;
     private LayoutInflater layoutInflater;
 
-    public RoomAdapter(Context context, List<Room> roomList) {
+    public FeedbackAdapter(Context context, List<Feedback> feedbackList) {
         this.context = context;
-        this.roomList = roomList;
+        this.feedbackList = feedbackList;
         layoutInflater = LayoutInflater.from(context);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView icLock;
-        public TextView roomName, roomStatus, roomType, roomPrice;
+        public TextView comment, star;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            icLock = itemView.findViewById(R.id.iv_lock);
-            roomName = itemView.findViewById(R.id.tv_room_name);
-            roomStatus = itemView.findViewById(R.id.tv_status);
-            roomType = itemView.findViewById(R.id.tv_room_type);
-            roomPrice = itemView.findViewById(R.id.tv_price);
+            star = itemView.findViewById(R.id.tv_star);
+            comment = itemView.findViewById(R.id.tv_feedback_comment);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,roomName.getText(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,comment.getText(),Toast.LENGTH_SHORT).show();
                 }
             });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -57,27 +52,19 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item = layoutInflater.inflate(R.layout.list_room, parent, false);
+        View item = layoutInflater.inflate(R.layout.list_feedback, parent, false);
         return new MyViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Room room = roomList.get(position);
-        if (room.getStatus() == 0) {
-            holder.icLock.setImageResource(R.drawable.ic_lock_open_24dp);
-            holder.roomStatus.setText(context.getString(R.string.empty));
-        } else {
-            holder.icLock.setImageResource(R.drawable.ic_lock_outline_24dp);
-            holder.roomStatus.setText(context.getString(R.string.booked));
-        }
-        holder.roomName.setText(room.getName());
-        holder.roomType.setText(room.getType());
-        holder.roomPrice.setText(String.valueOf(room.getPrice()));
+        Feedback feedback = feedbackList.get(position);
+        holder.star.setText(String.valueOf(feedback.getStar()));
+        holder.comment.setText(feedback.getComment());
     }
 
     @Override
     public int getItemCount() {
-        return roomList.size();
+        return feedbackList.size();
     }
 }

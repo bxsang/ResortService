@@ -38,4 +38,13 @@ public interface APIClient {
 
     @GET("booking.php")
     Call<GetPriceResponse> getPrice(@Query("get_price") String abc, @Query("type_name") String typeName);
+
+    @GET("reservation.php?get_all")
+    Call<GetReservationsResponse> getAllReservations();
+
+    @GET("feedback.php?get_all")
+    Call<GetFeedbackResponse> getAllFeedbacks();
+
+    @GET("statistics.php")
+    Call<GetStatisticsResponse> getStatistics();
 }

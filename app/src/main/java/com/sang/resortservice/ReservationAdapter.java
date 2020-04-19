@@ -4,39 +4,38 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sang.resortservice.api.Room;
+import com.sang.resortservice.api.Reservation;
 
 import java.util.List;
 
-public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder> {
+public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.MyViewHolder> {
     private Context context;
-    private List<Room> roomList;
+    private List<Reservation> reservationList;
     private LayoutInflater layoutInflater;
 
-    public RoomAdapter(Context context, List<Room> roomList) {
+    public ReservationAdapter(Context context, List<Reservation> reservationList) {
         this.context = context;
-        this.roomList = roomList;
+        this.reservationList = reservationList;
         layoutInflater = LayoutInflater.from(context);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView icLock;
-        public TextView roomName, roomStatus, roomType, roomPrice;
+        public TextView customerName, roomName, reservationDate, price, checkinDate, checkoutDate;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            icLock = itemView.findViewById(R.id.iv_lock);
-            roomName = itemView.findViewById(R.id.tv_room_name);
-            roomStatus = itemView.findViewById(R.id.tv_status);
-            roomType = itemView.findViewById(R.id.tv_room_type);
-            roomPrice = itemView.findViewById(R.id.tv_price);
+            customerName = itemView.findViewById(R.id.tv_customer_name);
+            roomName = itemView.findViewById(R.id.tv_room_name2);
+            reservationDate = itemView.findViewById(R.id.tv_reservation_date);
+            price = itemView.findViewById(R.id.tv_reservation_price);
+            checkinDate = itemView.findViewById(R.id.tv_checkin_date);
+            checkoutDate = itemView.findViewById(R.id.tv_checkout_date);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,27 +56,23 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item = layoutInflater.inflate(R.layout.list_room, parent, false);
+        View item = layoutInflater.inflate(R.layout.list_reservation, parent, false);
         return new MyViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Room room = roomList.get(position);
-        if (room.getStatus() == 0) {
-            holder.icLock.setImageResource(R.drawable.ic_lock_open_24dp);
-            holder.roomStatus.setText(context.getString(R.string.empty));
-        } else {
-            holder.icLock.setImageResource(R.drawable.ic_lock_outline_24dp);
-            holder.roomStatus.setText(context.getString(R.string.booked));
-        }
-        holder.roomName.setText(room.getName());
-        holder.roomType.setText(room.getType());
-        holder.roomPrice.setText(String.valueOf(room.getPrice()));
+        Reservation reservation = reservationList.get(position);
+        holder.customerName.setText(reservation.getCustomerName());
+        holder.roomName.setText(reservation.getRoomName());
+        holder.reservationDate.setText(reservation.getReservationDate());
+        holder.price.setText(String.valueOf(reservation.getPrice()));
+        holder.checkinDate.setText(reservation.getCheckinDate());
+        holder.checkoutDate.setText(reservation.getCheckoutDate());
     }
 
     @Override
     public int getItemCount() {
-        return roomList.size();
+        return reservationList.size();
     }
 }

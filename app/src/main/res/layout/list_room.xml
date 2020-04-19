@@ -25,7 +25,6 @@
             android:id="@+id/tv_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A101"
             android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Con trong"
             android:textSize="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_lock" />
@@ -45,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Loai phong"
+            android:text="@string/room_type"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_status" />
@@ -55,7 +53,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_status"
-            android:text="Single"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -66,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="224dp"
             android:layout_marginTop="68dp"
-            android:text="Gia"
+            android:text="@string/price"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
@@ -75,7 +72,6 @@
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -89,18 +85,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="0dp">
 
-            <ImageView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_edit_24dp"/>
-            <ImageView
+                app:icon="@drawable/ic_edit_24dp"
+                android:layout_marginBottom="10dp"
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"/>
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:src="@drawable/ic_delete_24dp"/>
+                app:icon="@drawable/ic_delete_24dp"
+                android:layout_marginBottom="10dp"
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

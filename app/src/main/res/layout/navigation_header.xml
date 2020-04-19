@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:padding="16dp"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/gradient_background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:text="Menu"/>
+</LinearLayout>
